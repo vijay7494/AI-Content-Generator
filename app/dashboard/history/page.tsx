@@ -36,12 +36,12 @@ async function History() {
   // }
 
   return (
-    <div className="h-screen bg-white m-5 border rounded-md shadow-md">
+    <div className="h-[50rem] bg-white m-5 border rounded-md shadow-md">
       <h2 className="font-bold text-4xl mt-4 ml-4">History</h2>
       <p className="text-gray-500 font-medium ml-5">
         Search your previously generated content
       </p>
-      <div className="m-4">
+      <div className="m-4 max-h-[40rem] overflow-y-auto">
         <div className="grid grid-cols-4 font-bold bg-slate-200">
           <div className="flex flex-row m-2">TEMPLATE</div>
           <div className="flex flex-row m-2 justify-center items-center">AI RESP</div>
@@ -51,16 +51,13 @@ async function History() {
           {HistoryList.map((item:any,index:any)=>{
             return(
               <div key={index} className="grid grid-cols-4 my-2 border rounded-lg">
-              <p className="m-4 text-black ">{item.templateSlug}</p>
-              <p className="overflow-hidden m-4 text-black ">{item.aiResponse.slice(0,300)+"..."}</p>
-              <p className="m-4 text-black font-bold justify-center items-center flex">{item.createdAt}</p>
-              <div className="justify-center items-center m-5 flex">
-                <Button
-                  className="w-[50%]"
-                  // onClick={() => navigator.clipboard.writeText(item.templateSlug)}
-                >
-                  Copy
-                </Button>
+                <p className="m-4 text-black ">{item.templateSlug}</p>
+                <p className="overflow-hidden m-4 text-black ">{item.aiResponse.slice(0,300)+"..."}</p>
+                <p className="m-4 text-black font-bold justify-center items-center flex">{item.createdAt}</p>
+                <div className="justify-center items-center m-5 flex">
+                  <Button className="w-[50%]">
+                    Copy
+                  </Button>
             </div>
         </div>
             )
