@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import Image from 'next/image';
 import { FileClock, History, Home, Settings, WalletIcon } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import UsageTrack from './UsageTrack';
 
 function SideNav() {
@@ -29,10 +29,10 @@ function SideNav() {
       path: "/dashboard/setting"
     },
   ]
-
+  const router = useRouter();
   const path = usePathname();
   useEffect(()=>{
-    // console.log(path)
+    
   },[])
 
   return (
@@ -44,6 +44,7 @@ function SideNav() {
       <div className="mt-3">
         {MenuList.map((menu, index)=>(
             <div 
+              onClick={() => router.push(menu.path)}
               className={`
               flex gap-2 p-3 mb-2
               hover:bg-primary hover:text-white rounded-lg
