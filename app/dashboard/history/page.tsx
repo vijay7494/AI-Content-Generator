@@ -11,23 +11,27 @@ import { TEMPLATE } from "../_components/TemplateListSection";
 export interface HISTORY {
   id: Number;
   formData: string;
-  aiResponse: string;
+  aiResponse: string | null;
   templateSlug: string;
   createdBy: string;
-  createdAt: string;
+  createdAt: string | null;
 }
 
 async function History() {
   const user = await currentUser();
+  const emailAddress = user?.primaryEmailAddress?.emailAddress;
 
-  {
-    /*@ts-ignore*/
+  let HistoryList: HISTORY[] = [];
+
+  if (emailAddress) {
+    HistoryList = await db
+      .select()
+      .from(AIoutput)
+      .where(eq(AIoutput?.createdBy, emailAddress))
+      .orderBy(desc(AIoutput.id));
+  } else {
+    console.error('User email address is undefined.');
   }
-  const HistoryList: HISTORY[] = await db
-    .select()
-    .from(AIoutput)
-    .where(eq(AIoutput?.createdBy, user?.primaryEmailAddress?.emailAddress))
-    .orderBy(desc(AIoutput.id));
 
   // const GetTemplateName = (slug:string) =>{
   //   const template:TEMPLATE|any = Templates?.find((item)=>item.slug){
