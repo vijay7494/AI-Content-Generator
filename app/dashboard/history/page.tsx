@@ -1,3 +1,4 @@
+// "use client";s
 import Templates from "@/app/(data)/Templates";
 import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
@@ -33,19 +34,19 @@ async function History() {
     console.error('User email address is undefined.');
   }
 
-  // const GetTemplateName = (slug:string) =>{
-  //   const template:TEMPLATE|any = Templates?.find((item)=>item.slug){
-  //     return template;
-  //   }
-  // }
+  const GetTemplateName = (slug:string) =>{
+    // const template:TEMPLATE|any = Templates?.find((item)=>item.slug){
+    //   return template;
+    // }
+  }
 
   return (
-    <div className="h-[50rem] bg-white m-5 border rounded-md shadow-md">
+    <div className="h-[calc(100vh-10rem)] bg-white m-5 border rounded-md shadow-md">
       <h2 className="font-bold text-4xl mt-4 ml-4">History</h2>
       <p className="text-gray-500 font-medium ml-5">
         Search your previously generated content
       </p>
-      <div className="m-4 max-h-[40rem] overflow-y-auto">
+      <div className="m-4 max-h-[calc(100vh-20rem)] overflow-y-auto">
         <div className="grid grid-cols-4 font-bold bg-slate-200">
           <div className="flex flex-row m-2">TEMPLATE</div>
           <div className="flex flex-row m-2 justify-center items-center">AI RESP</div>
@@ -59,8 +60,10 @@ async function History() {
                 <p className="overflow-hidden m-4 text-black ">{item.aiResponse.slice(0,300)+"..."}</p>
                 <p className="m-4 text-black font-bold justify-center items-center flex">{item.createdAt}</p>
                 <div className="justify-center items-center m-5 flex">
-                  <Button className="w-[50%]">
-                    Copy
+                  <Button 
+                  // onClick={() => navigator.clipboard.writeText(item.aiResponse)}
+                  variant={"ghost"} className="w-[50%]"
+                  >Copy
                   </Button>
             </div>
         </div>

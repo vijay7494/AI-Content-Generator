@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';  
+import React, { useContext, useState } from 'react';  
 import FormSection from '../_components/FormSection';
 import OutputSection from '../_components/OutputSection';
 import { TEMPLATE } from '../../_components/TemplateListSection';
@@ -12,6 +12,8 @@ import { db } from '@/utils/db';
 import { AIoutput } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment';
+import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
+import { useRouter } from 'next/navigation';
 
 interface PROPS{
     params:{
@@ -25,6 +27,12 @@ function CreateNewContent(props:PROPS) {
     const [loading,setLoading] = useState(false);
     const [aiOutput,setAiOutput] = useState<string>("");
     const {user} = useUser();
+    const router = useRouter();
+    const {totalUsage,setTotalUsage} = useContext(TotalUsageContext);
+    if(totalUsage >= 10000 && user?.primaryEmailAddress?.emailAddress !== "research.paper.pccoe@gmail.com" ){
+        router.push('/dashboard/billing');
+        return ;
+    }
     const generateAIContent = async (formData:any) => {
         const selectedPrompt = selectedTemplate?.aiPrompt;
 
@@ -48,7 +56,7 @@ function CreateNewContent(props:PROPS) {
             createdBy:user.primaryEmailAddress.emailAddress,
             createdAt: moment().format('DD/MM/YYYY'),
         });
-        console.log(result);
+        // console.log(result);
     }
 
   return (

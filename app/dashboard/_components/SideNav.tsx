@@ -38,12 +38,13 @@ function SideNav() {
   return (
     <div className='h-screen relative p-5 shadow-sm border bg-white'>
       <div className="flex justify-center">
-        <Image src={"/logo.svg"} alt={''} width={120} height={100}/>
+        <Image onClick={() => router.push(MenuList[0].path)} src={"/logo.svg"} alt={''} width={120} height={100}/>
       </div>
       <hr className='my-9 border'/>
       <div className="mt-3">
         {MenuList.map((menu, index)=>(
             <div 
+            key={index}
               onClick={() => router.push(menu.path)}
               className={`
               flex gap-2 p-3 mb-2

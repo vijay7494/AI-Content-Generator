@@ -6,7 +6,6 @@ import SideNav from "./dashboard/_components/SideNav";
 export default function Home() {
   return (
   <>
-    <SideNav/>
     <Dashboard/>
   </>
   );
