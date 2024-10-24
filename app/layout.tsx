@@ -22,7 +22,6 @@ export default function RootLayout({
         unsafe_disableDevelopmentModeWarnings: true,
       },
     }}
-    afterSignInUrl="/dashboard"
     >
     <html lang="en">
       <body className={inter.className}>{children}</body>

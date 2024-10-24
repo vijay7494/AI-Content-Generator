@@ -26,7 +26,7 @@ function UsageTrack() {
         result.forEach(element => {
             total = total + Number(element.aiResponse?.length);
         });
-        setTotalUsage(total);
+        setTotalUsage(0);
         // console.log(total);
     }
   return (
